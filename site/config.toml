@@ -1,0 +1,32 @@
+baseurl = "https://by-dev.com/"
+languageCode = "en-us"
+title = "Around Programming Blog"
+description = "a blog of developer"
+disqusShortname = "by-dev-blog"
+copyright = "Copyright © 2019, Yuriy B; all rights reserved."
+theme = "onepress"
+
+[author]
+	name = "Yuriy B"
+
+[params]
+	github = "https://github.com/neo-classic"
+	linkedin = "https://www.linkedin.com/in/yduppen"
+
+	theme = "theme-base-08"
+
+	tagline = "Development"
+
+	enableRSS = true
+
+	customCSS = false
+	readMore = "Read Up"
+
+	widgets = true
+	highlightJS = true
+
+	# googleAuthorship = "111509161421737611843"
+	# googleAnalytics = "UA-24629686-1"
+
+[taxonomies]
+    tag = "tags"
