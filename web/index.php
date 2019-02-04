@@ -1,0 +1,21 @@
+<?php
+$env = getenv('PHP_ENV');
+
+if (\in_array($env, ['loc'])) {
+    error_reporting(E_ALL);
+    ini_set('display_errors', true);
+    ini_set('display_startup_errors', true);
+    defined('YII_DEBUG') or define('YII_DEBUG', true);
+    defined('YII_ENV') or define('YII_ENV', 'dev');
+} else {
+    error_reporting(0);
+    ini_set('display_errors', false);
+    ini_set('display_startup_errors', false);
+}
+
+require __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . '/../vendor/yiisoft/yii2/Yii.php';
+
+$config = require __DIR__ . '/../config/web.php';
+
+(new yii\web\Application($config))->run();
