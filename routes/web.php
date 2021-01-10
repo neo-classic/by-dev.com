@@ -1,11 +1,8 @@
 <?php
 
-use App\Http\Controllers\PageController;
-use App\Http\Controllers\PostController;
-use App\Http\Livewire\AdminPost;
-use App\Http\Livewire\Post;
-use App\Http\Livewire\PostCreate;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
+use Symfony\Component\VarDumper\VarDumper;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,14 +15,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::get('/', [PostController::class, 'index']);
-Route::view('/', 'home');
-Route::get('{slug}', Post::class);
+Route::get('/', function () {
+    return view('welcome');
+});
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
-
-Route::get('admin/posts', AdminPost::class);
-Route::get('admin/pages', [PageController::class, 'index'])->name('admin.pages');
-Route::get('admin/tags', [PageController::class, 'index'])->name('admin.pages');
+Route::get('/clear-cache', function () {
+    $configCache = Artisan::call('config:cache');
+    $clearCache = Artisan::call('cache:clear');
+    VarDumper::dump([
+        $configCache,
+        $clearCache,
+    ]);
+});
