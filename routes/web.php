@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\BookController;
+use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
@@ -35,10 +37,12 @@ Route::get('/contacts', function () {
 
 Route::get('{slug}', [PostController::class, 'view'])->name('posts.view');
 
+Route::get('/tag/{slug}', [\App\Http\Controllers\TagController::class, 'view'])->name('tag.view');
+
 Route::prefix('admin')->group(function () {
     Route::get('posts', [\App\Http\Controllers\Admin\PostController::class, 'index'])->name('admin.posts.index');
-    Route::get('tags', [\App\Http\Controllers\Admin\TagController::class, 'index'])->name('admin.tags.index');
-    Route::get('books', [\App\Http\Controllers\Admin\BookController::class, 'index'])->name('admin.books.index');
+    Route::get('tags', [TagController::class, 'index'])->name('admin.tags.index');
+    Route::get('books', [BookController::class, 'index'])->name('admin.books.index');
 });
 
 Route::get('/clear-cache', function () {

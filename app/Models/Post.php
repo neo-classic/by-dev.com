@@ -17,5 +17,8 @@ class Post extends Model
         return PostFactory::new();
     }
 
-
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
 }

@@ -11,7 +11,7 @@ class PostController extends Controller
         return view('post.index', [
             'posts' => Post::where('is_active', 1)
                 ->orderByDesc('id')
-                ->simplePaginate(1),
+                ->simplePaginate(10),
         ]);
     }
 

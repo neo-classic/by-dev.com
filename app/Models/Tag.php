@@ -17,5 +17,8 @@ class Tag extends Model
         return TagFactory::new();
     }
 
-
+    public function posts()
+    {
+        return $this->belongsToMany(Post::class);
+    }
 }
