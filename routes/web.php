@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Symfony\Component\VarDumper\VarDumper;
@@ -14,9 +15,30 @@ use Symfony\Component\VarDumper\VarDumper;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', [PostController::class, 'index'])->name('posts');
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
+});*/
+
+Route::get('/about', function () {
+    return view('/static/about');
+})->name('about');
+
+Route::get('/books', function () {
+    return 'list of books';
+})->name('books');
+
+Route::get('/contacts', function () {
+    return 'contacts page';
+})->name('contacts');
+
+Route::get('{slug}', [PostController::class, 'view'])->name('posts.view');
+
+Route::prefix('admin')->group(function () {
+    Route::get('posts', [\App\Http\Controllers\Admin\PostController::class, 'index'])->name('admin.posts.index');
+    Route::get('tags', [\App\Http\Controllers\Admin\TagController::class, 'index'])->name('admin.tags.index');
+    Route::get('books', [\App\Http\Controllers\Admin\BookController::class, 'index'])->name('admin.books.index');
 });
 
 Route::get('/clear-cache', function () {
@@ -27,3 +49,7 @@ Route::get('/clear-cache', function () {
         $clearCache,
     ]);
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
