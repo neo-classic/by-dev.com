@@ -10,6 +10,7 @@ class PostController extends Controller
     {
         return view('post.index', [
             'posts' => Post::where('is_active', 1)
+                ->with('tags')
                 ->orderByDesc('id')
                 ->simplePaginate(10),
         ]);
@@ -17,6 +18,13 @@ class PostController extends Controller
 
     public function view(string $slug)
     {
-        return "Read the post slug: $slug";
+        $post = Post::where('slug', $slug)->first();
+        if (!$post) {
+            abort(404);
+        }
+
+        return view('post.view', [
+            'post' => $post,
+        ]);
     }
 }
